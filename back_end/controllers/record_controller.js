@@ -8,10 +8,10 @@ const getAllRecord = async (req, res) => {
 
 const createRecord = async (req, res) => {
   //   console.log("DD", req.body);
-  const { name, description } = req.body;
+  const { uid, cid, name, amount, transaction_type, description } = req.body;
 
-  await sql`INSERT INTO users(name, description, ) 
-          VALUES (${name}, ${description},);
+  await sql`INSERT INTO users(uid, cid, name, amount, transaction_type, description ) 
+          VALUES (${uid}, ${cid},${name},${amount},${transaction_type},${description},);
 `;
   res.status(201).json({ message: "амжилттай үүслээ." });
 };

@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 app.use(logger());
 
+app.use("");
 app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/records", recordRoutes);

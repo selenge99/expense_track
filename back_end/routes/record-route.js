@@ -4,7 +4,7 @@ const {
   createRecord,
   updateRecord,
   deleteRecord,
-} = require("../controllers/record-controller");
+} = require("../controllers/record_controller");
 
 const router = Router();
 

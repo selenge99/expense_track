@@ -23,7 +23,9 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  await sql`DELETE FROM users WHERE id = '881a0d11-a80f-4cc5-9bca-b1c68175558f'`;
+  const { id } = req.params;
+  console.log("id", id);
+  await sql`DELETE FROM users WHERE id=${id}`;
   res.status(201).json({ message: "Amjilttai ustgalaa" });
 };
 
