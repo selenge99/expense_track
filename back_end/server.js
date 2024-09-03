@@ -7,7 +7,7 @@ dotenv.config();
 const userRoutes = require("./routes/user-route");
 const categoryRoutes = require("./routes/category-route");
 const recordRoutes = require("./routes/record-route");
-
+const authRoutes = require ("./routes/auth-route")
 const PORT = process.env.PORT;
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 app.use(logger());
 
-app.use("");
+app.use("auth",userRoutes);
 app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/records", recordRoutes);
