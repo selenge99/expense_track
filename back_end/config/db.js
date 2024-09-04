@@ -16,4 +16,4 @@ const sql = postgres({
   },
 });
 
-module.exports = { sql };
+module.exports = sql;

@@ -1,8 +1,8 @@
-const { sql } = require("../config/db");
+const sql = require("../config/db");
 
 const getAllCategory = async (req, res) => {
   const result = await sql`SELECT * FROM categories`;
-  console.log(result);
+  console.log("USER", req.user);
   res.status(200).json({ users: result });
 };
 
