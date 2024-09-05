@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+// import Header from "../components/header";
 const Layout = ({ children }) => {
   const [user, setUser] = useState(null);
   // const { user, fetchUserData } = useContext(UserContext);
@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       {/* <Header user={user} logout={logout} /> */}
-      <header>Header - {user?.name}</header>
+      {/* <Header /> */}
       {children}
     </div>
   );
