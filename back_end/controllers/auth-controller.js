@@ -4,13 +4,18 @@ const jwt = require("jsonwebtoken");
 
 const signUp = async (req, res) => {
   // console.log("DD", req.body);
-  const { email, name, password, profile_img } = req.body;
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  const data = await sql`INSERT INTO users(email, name, password, profile_img ) 
+  try {
+    const { email, name, password, profile_img } = req.body;
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const data =
+      await sql`INSERT INTO users(email, name, password, profile_img ) 
             VALUES (${email}, ${name}, ${hashedPassword}, 'url');
   `;
-  console.log("Data", data);
-  res.status(201).json({ message: "New user is registered successfully" });
+    console.log("Data", data);
+    res.status(201).json({ message: "New user is registered successfully" });
+  } catch (error) {
+    res.status(400).json({ message: "New user is registered unsuccessfully" });
+  }
 };
 
 const signIn = async (req, res) => {
