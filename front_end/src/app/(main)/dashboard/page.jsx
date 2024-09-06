@@ -1,18 +1,30 @@
 "use client";
 
 import React, { useContext } from "react";
-import Highcharts from "highcharts";
 import { UserContext } from "@/app/context/user-context";
+import { Doughnut } from "react-chartjs-2";
+import { Bar, Utils } from "react-chartjs-2";
+import { Chart, ArcElement } from "chart.js";
+Chart.register(ArcElement);
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
+  const data = {
+    labels: ["Red", "Blue", "Yellow"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [300, 50, 100],
+        backgroundColor: [
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
 
-  const highcharts = [
-    { month: "Jan", value: 100000 },
-    { month: "Feb", value: 200000 },
-    { month: "Mar", value: 300000 },
-    { month: "Apr", value: 400000 },
-  ];
   return (
     <div>
       <div className="flex gap-4 justify-center">
@@ -52,6 +64,9 @@ const Dashboard = () => {
           </div>
           <p className="text-green-500">-1000</p>
         </div>
+      </div>
+      <div className="w-40 h-40">
+        <Doughnut data={data} />
       </div>
     </div>
   );
