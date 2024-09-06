@@ -1,9 +1,15 @@
-import { headers } from "next/headers";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import { FaPlus } from "react-icons/fa";
+import { UserContext } from "../context/user-context";
 
 const Header = () => {
+  const { user } = useContext(UserContext);
+  const logout = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
+
   return (
     <header className="flex items-center max-w-[1200px] mx-auto justify-between py-4 ">
       <div className="flex gap-6 items-center">
@@ -13,6 +19,9 @@ const Header = () => {
         </Link>
         <Link href="/records">
           <p>Records</p>
+        </Link>
+        <Link href="/">
+          <p>{user.name}</p>
         </Link>
       </div>
       <div className="flex gap-6 items-center">
@@ -28,7 +37,9 @@ const Header = () => {
             />
           </div>
         </div>
-        <button className="btn btn-sm">Log out</button>
+        <button className="btn btn-sm" onClick={logout}>
+          Log out
+        </button>
       </div>
     </header>
   );

@@ -6,13 +6,14 @@ import { apiUrl } from "@/utils/util";
 
 export const UserContext = createContext();
 
-export const UserProvider = () => {
-  const [user, setUser] = useSate({
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState({
     userId: "",
-    name: "",
+    name: "Nara",
     email: "",
     profile_img: "",
   });
+
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -27,6 +28,7 @@ export const UserProvider = () => {
       console.log("error fetching user data:", error);
     }
   };
+
   return (
     <UserContext.Provider value={{ user, fetchUserData }}>
       {children}
