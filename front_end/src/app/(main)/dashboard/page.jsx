@@ -2,29 +2,14 @@
 
 import React, { useContext } from "react";
 import { UserContext } from "@/app/context/user-context";
-import { Doughnut } from "react-chartjs-2";
 import { Bar, Utils } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
+import BarChart from "./BarChart";
+import DoughnutChart from "./Doughnut";
+
 Chart.register(ArcElement);
 
 const Dashboard = () => {
-  const { user } = useContext(UserContext);
-  const data = {
-    labels: ["Red", "Blue", "Yellow"],
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [300, 50, 100],
-        backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)",
-        ],
-        hoverOffset: 4,
-      },
-    ],
-  };
-
   return (
     <div>
       <div className="flex gap-4 justify-center">
@@ -52,6 +37,10 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <div className="w-full flex p-6 gap-6">
+        <DoughnutChart />
+        <BarChart />
+      </div>
       <div className="max-w-[1200px] h-114 bg-#FFFF">
         <h1>Last Records</h1>
         <div className="flex justify-between">
@@ -64,9 +53,6 @@ const Dashboard = () => {
           </div>
           <p className="text-green-500">-1000</p>
         </div>
-      </div>
-      <div className="w-40 h-40">
-        <Doughnut data={data} />
       </div>
     </div>
   );
