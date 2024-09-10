@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/app/context/user-context";
 import { Bar, Utils } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
@@ -10,6 +10,34 @@ import DoughnutChart from "./Doughnut";
 Chart.register(ArcElement);
 
 const Dashboard = () => {
+  const [transactions, setTransactions] = useState([]);
+  const { user } = useContext(UserContext);
+  const [cardInfo, setCardInfo] = useState(null);
+
+  const fetchTransactions = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8008 / records`);
+      setTransactions(res.data.records);
+    } catch (error) {
+      console.log("failed to fetched ", error);
+    }
+  };
+  const getInfoCardData = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8008 /records/info`);
+      console.log("ST", res.data.info);
+      setCardInfo(res.data.info);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch transactions");
+    }
+  };
+
+  useEffect(() => {
+    fetchTransactions();
+    getInfoCardData();
+  }, [user]);
+
   return (
     <div>
       <div className="flex gap-4 justify-center">
@@ -54,6 +82,9 @@ const Dashboard = () => {
           <p className="text-green-500">-1000</p>
         </div>
       </div>
+      {transactions.map((tr) => (
+        <div>{tr.name}</div>
+      ))}
     </div>
   );
 };
