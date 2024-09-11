@@ -4,8 +4,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/app/context/user-context";
 import { Bar, Utils } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
-import BarChart from "./BarChart";
-import DoughnutChart from "./Doughnut";
+import BarChart from "../../components/BarChart";
+import DoughnutChart from "../../components/Doughnut";
+import axios from "axios";
+import RecordList from "@/app/components/recordList";
 
 Chart.register(ArcElement);
 
@@ -16,7 +18,7 @@ const Dashboard = () => {
 
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get(`http://localhost:8008 / records`);
+      const res = await axios.get(`http://localhost:8008/records`);
       setTransactions(res.data.records);
     } catch (error) {
       console.log("failed to fetched ", error);
@@ -24,12 +26,12 @@ const Dashboard = () => {
   };
   const getInfoCardData = async () => {
     try {
-      const res = await axios.get(`http://localhost:8008 /records/info`);
-      console.log("ST", res.data.info);
-      setCardInfo(res.data.info);
+      const res = await axios.get(`http://localhost:8008/records/info`);
+      console.log("ST", res.data);
+      setCardInfo(res.data);
     } catch (error) {
       console.error(error);
-      toast.error("Failed to fetch transactions");
+      // toast.error("Failed to fetch transactions");
     }
   };
 
@@ -51,7 +53,7 @@ const Dashboard = () => {
         <div className="card bg-base-100 w-96 shadow-xl">
           <div className="card-body">
             <h2 className="card-title">Your Income</h2>
-            <p>1,200,000</p>
+            <p>{cardInfo?.income.sum}$</p>
             <p>Your Income Amount</p>
             <p>32% from last month</p>
           </div>
@@ -59,7 +61,7 @@ const Dashboard = () => {
         <div className="card bg-base-100 w-96 shadow-xl">
           <div className="card-body">
             <h2 className="card-title">Total Expenses</h2>
-            <p>-1,200,000</p>
+            <p>-{cardInfo?.expense.sum}$</p>
             <p>Your expense Amount</p>
             <p>32% from last month </p>
           </div>
@@ -69,22 +71,8 @@ const Dashboard = () => {
         <DoughnutChart />
         <BarChart />
       </div>
-      <div className="max-w-[1200px] h-114 bg-#FFFF">
-        <h1>Last Records</h1>
-        <div className="flex justify-between">
-          <div className="flex gap-3">
-            <img src="./group.png" alt="" />
-            <div>
-              <p>Lending & Renting</p>
-              <p>3 hours ago</p>
-            </div>
-          </div>
-          <p className="text-green-500">-1000</p>
-        </div>
-      </div>
-      {transactions.map((tr) => (
-        <div>{tr.name}</div>
-      ))}
+      <h3>Last Records</h3>
+      <RecordList />
     </div>
   );
 };

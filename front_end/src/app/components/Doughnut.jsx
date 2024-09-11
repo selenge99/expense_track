@@ -1,11 +1,29 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const DoughnutChart = ({ categoryData }) => {
+const DoughnutChart = ({}) => {
+  const [doughnutChartInfo, setDoughnutChartInfo] = useState(null);
+  const getDoughnutChartData = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8008/records/chart`);
+      console.log("ST", res.data);
+      setDoughnutChartInfo(res.data);
+    } catch (error) {
+      console.error(error);
+      // toast.error("Failed to fetch transactions");
+    }
+  };
+  useEffect(() => {
+    getDoughnutChartData();
+  }, []);
+  const lbl = doughnutChartInfo?.donut.map((d) => d.cat_name);
+  const val = doughnutChartInfo?.donut.map((d) => d.sum);
   const data2 = {
     datasets: [
       {
-        data: [10, 10, 20, 40, 20],
+        data: val,
 
         backgroundColor: [
           "#1C64F2",
@@ -24,7 +42,7 @@ const DoughnutChart = ({ categoryData }) => {
       },
     ],
 
-    labels: ["Food", "Tech", "Taxi", "Health", "Car"],
+    labels: lbl,
   };
 
   const options2 = {

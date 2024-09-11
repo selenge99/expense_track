@@ -2,12 +2,13 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { FaPlus } from "react-icons/fa";
 import { UserContext } from "../context/user-context";
+import router from "next/router";
 
 const Header = () => {
   const { user } = useContext(UserContext);
   const logout = () => {
     localStorage.removeItem("token");
-    router.push("/login");
+    router.push("/signin");
   };
 
   return (
@@ -18,7 +19,7 @@ const Header = () => {
           <p>Dashboard</p>
         </Link>
         <Link href="/records">
-          <p>Records</p>
+          <p>Records </p>
         </Link>
         <Link href="/">
           <p>{user.name}</p>
