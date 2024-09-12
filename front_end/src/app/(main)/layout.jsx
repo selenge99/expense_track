@@ -1,17 +1,16 @@
 "use client";
 
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import Header from "../components/header";
-import { redirect } from "next/navigation";
-import { UserContext, UserProvider } from "../context/user-context";
+import { DashboardProvider } from "../context/dashboard-context";
+import { UserProvider } from "../context/user-context";
 
 const Layout = ({ children }) => {
-  
   return (
     <UserProvider>
-      <Header />
-      {children}
+      <DashboardProvider>
+        <Header />
+        {children}
+      </DashboardProvider>
     </UserProvider>
   );
 };

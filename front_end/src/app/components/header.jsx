@@ -2,9 +2,10 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { FaPlus } from "react-icons/fa";
 import { UserContext } from "../context/user-context";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   const { user } = useContext(UserContext);
   const logout = () => {
     localStorage.removeItem("token");

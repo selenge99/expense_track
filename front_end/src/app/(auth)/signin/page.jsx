@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { apiUrl } from "@/utils/util";
 
 const SignIn = () => {
   const router = useRouter();
@@ -13,17 +14,19 @@ const SignIn = () => {
   console.log("password", password);
 
   const handleSignin = async () => {
-    const response = await axios.post("http://localhost:8008/auth/signin", {
-      email: email,
-      password: password,
-    });
-    console.log("Success", response);
-    if (response.status === 200) {
-      const { token } = response.data;
-      localStorage.setItem("token", token);
-      router.push("/dashboard");
-    } else {
-      alert("Error");
+    try {
+      const response = await axios.post(`${apiUrl}/auth/signin`, {
+        email: email,
+        password: password,
+      });
+      console.log("Success", response);
+      if (response.status === 200) {
+        const { token } = response.data;
+        localStorage.setItem("token", token);
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.error("failed");
     }
   };
   return (

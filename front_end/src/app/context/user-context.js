@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
 
@@ -9,7 +9,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
     userId: "",
-    name: "Nara",
+    name: "",
     email: "",
     profile_img: "",
   });
@@ -21,13 +21,17 @@ export const UserProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.status === 200) {
-        setUser(response.data);
         console.log("User", response.data);
+        setUser(response.data.user);
       }
     } catch (error) {
       console.log("error fetching user data:", error);
     }
   };
+
+  useEffect(() => {
+    fetchUserData();
+  });
 
   return (
     <UserContext.Provider value={{ user, fetchUserData }}>

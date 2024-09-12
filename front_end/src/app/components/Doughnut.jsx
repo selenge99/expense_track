@@ -1,25 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Doughnut } from "react-chartjs-2";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { DashboardContext } from "../context/dashboard-context";
 
 const DoughnutChart = ({}) => {
-  const [doughnutChartInfo, setDoughnutChartInfo] = useState(null);
-  const getDoughnutChartData = async () => {
-    try {
-      const res = await axios.get(`http://localhost:8008/records/chart`);
-      console.log("ST", res.data);
-      setDoughnutChartInfo(res.data);
-    } catch (error) {
-      console.error(error);
-      // toast.error("Failed to fetch transactions");
-    }
-  };
-  useEffect(() => {
-    getDoughnutChartData();
-  }, []);
-  const lbl = doughnutChartInfo?.donut.map((d) => d.cat_name);
-  const val = doughnutChartInfo?.donut.map((d) => d.sum);
+  const { donut } = useContext(DashboardContext);
+  const lbl = donut?.donut.map((d) => d.cat_name);
+  const val = donut?.donut.map((d) => d.sum);
   const data2 = {
     datasets: [
       {

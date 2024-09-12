@@ -11,17 +11,18 @@ const getAllRecord = async (req, res) => {
 };
 
 const getInfo = async (req, res) => {
+  // const { id } = req.user;
   try {
     console.log("income");
     const [income, expense] =
-      await sql`SELECT transaction_type, SUM (amount) FROM records GROUP BY transaction_type`;
+      await sql`SELECT transaction_type, SUM (amount) FROM records  GROUP BY transaction_type`;
     res.status(200).json({ income, expense });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "failed" });
   }
 };
-const getChartInfo = async (req, res) => {
+const getChartData = async (req, res) => {
   try {
     const donutChartData = await sql`SELECT 
 SUM(r.amount), c.name cat_name 
@@ -49,5 +50,5 @@ ORDER BY DATE_TRUNC('month', r.created_at);`;
 module.exports = {
   getAllRecord,
   getInfo,
-  getChartInfo,
+  getChartData,
 };

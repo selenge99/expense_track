@@ -1,9 +1,13 @@
 const sql = require("../config/db");
 
 const getCurrentUser = async (req, res) => {
-  const [result] = await sql`SELECT * FROM users WHERE id=${req.user.id};`;
-  console.log(result);
-  res.status(200).json({ user: result, message: "Success" });
+  try {
+    const [result] = await sql`SELECT * FROM users WHERE id=${req.user.id};`;
+    console.log(result);
+    res.status(200).json({ user: result, message: "Success" });
+  } catch (error) {
+    console.error("failed");
+  }
 };
 
 const getAllUser = async (req, res) => {

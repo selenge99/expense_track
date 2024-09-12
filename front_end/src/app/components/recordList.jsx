@@ -18,7 +18,7 @@ const RecordList = () => {
   };
   useEffect(() => {
     fetchTransactions();
-  }, [user]);
+  }, []);
   return (
     <div>
       {transactions?.map((tr) => (

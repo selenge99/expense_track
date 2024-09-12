@@ -1,10 +1,15 @@
 const { Router } = require("express");
-const { getAllRecord, getInfo,getChartInfo } = require("../controllers/record_controller");
+const {
+  getAllRecord,
+  getInfo,
+  getChartData,
+} = require("../controllers/record_controller");
+// const { auth } = require("../middlewares/auth");
 
 const router = Router();
 
 router.route("/info").get(getInfo);
+router.route("/chart").get(getChartData);
 router.route("/").get(getAllRecord);
-router.route("/chart").get(getChartInfo);
 
 module.exports = router;
