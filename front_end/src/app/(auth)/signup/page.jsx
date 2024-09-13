@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import next from "next";
 import Link from "next/link";
+import { apiUrl } from "@/utils/util";
 
 const SignUp = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const SignUp = () => {
     console.log("Repassword", repassword);
 
     if (password === repassword) {
-      const response = await axios.post("http://localhost:8008/auth/signup", {
+      const response = await axios.post(`${apiUrl}/auth/signup`, {
         name: name,
         email: email,
         password: password,
