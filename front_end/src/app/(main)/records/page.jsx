@@ -1,5 +1,6 @@
 "use client";
 
+import AddRecord from "@/app/components/addRecord";
 import RecordList from "@/app/components/recordList";
 import React from "react";
 import { useContext, useEffect, useState } from "react";
@@ -11,9 +12,13 @@ const RecordPage = () => {
     <div className="flex max-w-[2000px] mx-auto mt-8 gap-6">
       <div className="w-[282px] flex flex-col px-4 py-6 bg-white rounded-xl gap-6">
         <h3>Records</h3>
-        <button className="btn btn-info bg-[#0166FF] text-white rounded-5 py-1 text-base h-8">
+        <button
+          className="btn btn-info bg-[#0166FF] text-white rounded-5 py-1 text-base h-8"
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+        >
           +Add
         </button>
+        <AddRecord />
         <input
           type="text"
           placeholder="Search"

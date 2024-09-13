@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { DashboardContext } from "../context/dashboard-context";
 
-const Cardinfo = ({ Cardinfo }) => {
-  const { transactions, cardInfo } = useContext(DashboardContext);
+const Cardinfo = () => {
+  const { cardInfo } = useContext(DashboardContext);
   return (
     <div>
       <div className="flex gap-4 justify-center">
@@ -16,7 +16,7 @@ const Cardinfo = ({ Cardinfo }) => {
         <div className="card bg-base-100 w-96 shadow-xl">
           <div className="card-body">
             <h2 className="card-title">Your Income</h2>
-            <p>{Cardinfo?.income.sum}$</p>
+            <p>{cardInfo?.income.sum}$</p>
             <p>Your Income Amount</p>
             <p>32% from last month</p>
           </div>
@@ -24,7 +24,7 @@ const Cardinfo = ({ Cardinfo }) => {
         <div className="card bg-base-100 w-96 shadow-xl">
           <div className="card-body">
             <h2 className="card-title">Total Expenses</h2>
-            <p>-{Cardinfo?.expense.sum}$</p>
+            <p>-{cardInfo?.expense.sum}$</p>
             <p>Your expense Amount</p>
             <p>32% from last month </p>
           </div>

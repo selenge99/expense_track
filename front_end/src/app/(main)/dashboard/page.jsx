@@ -17,7 +17,7 @@ const Dashboard = () => {
   const { user, fetchUserData } = useContext(UserContext);
   const { transactions, cardInfo } = useContext(DashboardContext);
   return (
-    <div>
+    <div className="">
       <Cardinfo />
       <div className="w-full flex p-6 gap-6">
         <DoughnutChart />
