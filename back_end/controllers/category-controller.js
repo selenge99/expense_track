@@ -3,7 +3,7 @@ const sql = require("../config/db");
 const getAllCategory = async (req, res) => {
   const result = await sql`SELECT * FROM categories`;
   console.log("USER", req.user);
-  res.status(200).json({ users: result });
+  res.status(200).json({ categories: result });
 };
 
 const createCategory = async (req, res) => {

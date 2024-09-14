@@ -2,12 +2,15 @@
 
 import AddRecord from "@/app/components/addRecord";
 import RecordList from "@/app/components/recordList";
+import { DashboardContext } from "@/app/context/dashboard-context";
 import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { IoMdEye } from "react-icons/io";
 import { IoIosAdd } from "react-icons/io";
 
 const RecordPage = () => {
+  const { categories } = useContext(DashboardContext);
+
   return (
     <div className="flex max-w-[2000px] mx-auto mt-8 gap-6">
       <div className="w-[282px] flex flex-col px-4 py-6 bg-white rounded-xl gap-6">
@@ -68,46 +71,12 @@ const RecordPage = () => {
           </button>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Food & Drinks</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Shopping</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Transportations</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Vehicle</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Life and Entertaiment</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Communication,PC</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Financial expense</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Investments</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Income</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <IoMdEye size={20} />
-            <p className="text-base text-[#1F2937]">Others</p>
-          </div>
+          {categories?.map((cat) => (
+            <div className="flex gap-2 items-center">
+              <IoMdEye size={20} />
+              <p className="text-base text-[#1F2937]">{cat?.name}</p>
+            </div>
+          ))}
         </div>
         <div className="flex items-center gap-2">
           <IoIosAdd size={20} />

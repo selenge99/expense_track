@@ -10,10 +10,11 @@ export const DashboardProvider = ({ children }) => {
   const [chartData, setChartData] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [cardInfo, setCardInfo] = useState(null);
+  const [categories, setCategories] = useState(null);
 
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get(`http://localhost:8008/records`);
+      const res = await axios.get(`${apiUrl}/records`);
       setTransactions(res.data.records);
     } catch (error) {
       console.log("failed to fetched ", error);
@@ -22,7 +23,7 @@ export const DashboardProvider = ({ children }) => {
 
   const getInfoCardData = async () => {
     try {
-      const res = await axios.get(`http://localhost:8008/records/info`);
+      const res = await axios.get(`${apiUrl}/records/info`);
       console.log("ST", res.data);
       setCardInfo(res.data);
     } catch (error) {
@@ -42,15 +43,33 @@ export const DashboardProvider = ({ children }) => {
       // toast.error("Failed to fetch transactions");
     }
   };
+
+  const getCategories = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/categories`);
+      console.log("ST", res.data);
+      setCategories(res.data.categories);
+    } catch (error) {
+      console.error(error);
+      // toast.error("Failed to fetch transactions");
+    }
+  };
   useEffect(() => {
     fetchTransactions();
     getInfoCardData();
     getChartData();
+    getCategories();
   }, []);
 
   return (
     <DashboardContext.Provider
-      value={{ bar: chartData, donut: chartData, transactions, cardInfo }}
+      value={{
+        bar: chartData,
+        donut: chartData,
+        transactions,
+        cardInfo,
+        categories,
+      }}
     >
       {children}
     </DashboardContext.Provider>

@@ -6,12 +6,10 @@ import { UserProvider } from "../context/user-context";
 
 const Layout = ({ children }) => {
   return (
-    <UserProvider>
-      <DashboardProvider>
-        <Header />
-        {children}
-      </DashboardProvider>
-    </UserProvider>
+    <DashboardProvider>
+      <Header />
+      {children}
+    </DashboardProvider>
   );
 };
 

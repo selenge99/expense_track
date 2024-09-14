@@ -1,24 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/user-context";
-// import { apiUrl } from "../utils/util";
-import axios from "axios";
+import React, { useContext } from "react";
+import { DashboardContext } from "../context/dashboard-context";
 
 const RecordList = () => {
-  const { user } = useContext(UserContext);
-  const [transactions, setTransactions] = useState([]);
-  const fetchTransactions = async () => {
-    try {
-      const res = await axios.get(`http://localhost:8008/records`);
-      console.log("DD", res.data.records);
-      setTransactions(res.data.records);
-    } catch (error) {
-      console.error(error);
-      //   toast.error("Failed to fetch transactions");
-    }
-  };
-  useEffect(() => {
-    fetchTransactions();
-  }, []);
+  const { transactions } = useContext(DashboardContext);
+
   return (
     <div>
       {transactions?.map((tr) => (

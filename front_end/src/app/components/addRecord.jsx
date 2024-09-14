@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { GoX } from "react-icons/go";
+import { DashboardContext } from "../context/dashboard-context";
 
 const AddRecord = () => {
+  const { categories } = useContext(DashboardContext);
+  const [recordFormData, setRecorFormdData] = useState({
+    name: "",
+    amount: 0,
+    cid: "",
+    uid: "",
+    transaction_type: "EXP",
+    description: "",
+  });
+  console.log("CCCCCC", categories);
+  const handleChangeForm = (e) => {
+    setRecorFormdData({ ...recordFormData, [e.target.name]: e.target.value });
+  };
   return (
     <dialog id="my_modal_3" className="modal">
       <div className="card bg-base-100 w-[1000px] max-h-[512px] shadow-xl">
@@ -33,11 +47,19 @@ const AddRecord = () => {
             </div>
             <div className="mt-5">
               <p className="text-base">Category</p>
-              <input
-                className="border-[1px] border-[#D1D5DB] px-4 py-3 rounded-xl bg-[#F9FAFB] w-full"
-                type="list"
-                placeholder="Choose"
-              />
+              <select
+                name="select select-bordered"
+                onChange={(e) => {
+                  console.log("Selected CAT", e.target.value);
+                }}
+              >
+                <option disabled selected>
+                  Choose
+                </option>
+                {categories?.map((c) => (
+                  <option value={c.id}>{c.name}</option>
+                ))}
+              </select>
             </div>
             <div className="mt-5 flex w-full gap-3 justify-between">
               <div className="w-1/2">
