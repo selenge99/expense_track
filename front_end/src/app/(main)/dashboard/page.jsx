@@ -2,9 +2,9 @@
 
 import React, { useContext } from "react";
 import { UserContext } from "@/app/context/user-context";
-import RecordList from "@/app/components/recordList";
 import Cardinfo from "@/app/components/cardinfo";
 import { DashboardContext } from "@/app/context/dashboard-context";
+import { RecordCard } from "@/app/components/record-card";
 
 const Dashboard = () => {
   const { user, fetchUserData } = useContext(UserContext);
@@ -17,7 +17,7 @@ const Dashboard = () => {
         <BarChart /> */}
       </div>
       <h3>Last Records</h3>
-      <RecordList />
+      <RecordCard />
     </div>
   );
 };

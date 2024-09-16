@@ -2,7 +2,6 @@
 
 import Header from "../components/header";
 import { DashboardProvider } from "../context/dashboard-context";
-import { UserProvider } from "../context/user-context";
 
 const Layout = ({ children }) => {
   return (
